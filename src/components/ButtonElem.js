@@ -33,7 +33,7 @@ const ButtonElem = (props) => {
   return (
     <TouchableOpacity style={styles(props.color).appButtonContainer} onPress={onPress}>
       <Text style={styles.appButtonText}></Text>
-      <FlatList
+      {/* <FlatList
         data={todoList}
         keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => {
@@ -41,7 +41,7 @@ const ButtonElem = (props) => {
             <Text>{item.id}</Text>
           );
         }}
-      />
+      /> */}
       
     </TouchableOpacity>
   );
