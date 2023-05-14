@@ -9,12 +9,28 @@ const ButtonElem = (props) => {
   const buttonId = props.id;
 
   const [task, setTask] = React.useState('');
-  const todoList = useSelector(state => state.todos);
+  
+  const state = useSelector(state => state);
+  const buttonStates = useSelector(state => state.buttonStates);
+  const buttonState = buttonStates.find(x => x.button == buttonId).state
+
+
   const dispatch = useDispatch();
 
 
   const onPress = () => {
     dispatch(addTodo(task))
+
+    const currentPosition = state.currentPosition;
+    const numbers = state.numbers;
+
+    if(numbers[currentPosition] == buttonId) {
+      alert('success')
+    }
+    else {
+      alert('fail')
+    }
+
     // 
     // numbers
     // current position 
@@ -24,14 +40,14 @@ const ButtonElem = (props) => {
 
     //if(numbers[currentPosition] == buttonId && currentPosition < score) currentPosition++;
 
-    // if(numbers[currentPosition] != buttonId) score = 0; 
+    // if(numbers[currentPosition] != buttonId) score = 0;
 
 
     setTask('')
   }
 
   return (
-    <TouchableOpacity style={styles(props.color).appButtonContainer} onPress={onPress}>
+    <TouchableOpacity style={styles(props.color, buttonState).appButtonContainer} onPress={onPress}>
       <Text style={styles.appButtonText}></Text>
       {/* <FlatList
         data={todoList}
@@ -47,14 +63,15 @@ const ButtonElem = (props) => {
   );
 };
 
-const styles = (color) => StyleSheet.create({
+const styles = (color, buttonState) => StyleSheet.create({
   appButtonContainer: {
     elevation: 8,
     borderRadius: 40,
     paddingVertical: 10,
     paddingHorizontal: 12,
     backgroundColor: color,
-    margin: 30
+    margin: 30,
+    opacity: (buttonState == 1 ? 1 : 0.2)
   },
   appButtonText: {
     fontSize: 18,

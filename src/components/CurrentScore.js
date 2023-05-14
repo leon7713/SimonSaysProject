@@ -7,10 +7,12 @@ TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 const CurrentScore = () => {
 
-  const todoList = useSelector(state => state.todos);
+  const numbers = useSelector(state => state.numbers);
 
-  return todoList.map((item, index) =>
-    <Text style={styles.appButtonText} key={index}>Current score: {item.id}</Text>);
+  return <Text style={styles.appButtonText}>Current score: {numbers.length}</Text>;
+  
+  //map((item, index) =>
+  //  <Text style={styles.appButtonText} key={index}>Current score: {item.id}</Text>);
 };
 
 const styles = StyleSheet.create({

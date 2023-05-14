@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { setNumbers, setButtonState, clearButtonStates } from '../redux/action';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
@@ -8,44 +9,73 @@ const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
 }
 
-const buttonPress = () => {
-  // Get score from redux
-  const score = 5;
-
+const getRandomArrayInt = (count) => {
   let numbers = [];
 
-  for(let i = 0; i < score; i++) {
-    numbers.push(getRandomInt(3));
+  for(let i = 0; i < count; i++) {
+    numbers.push(getRandomInt(4));
   }
 
-  // Set numbers to redux
-
-  // Button states
-  let buttonStates = [
-    {button: 0, state: 0 },
-    {button: 1, state: 0 },
-    {button: 2, state: 0 },
-    {button: 3, state: 0 },
-  ]
-
-  numbers.forEach(element => {
-    //buttonStates.forEach(btn => btn.state = 0);
-
-    buttonStates.map(x => {
-      if(x.button == element) x.state = 1;
-      else x.state = 0;
-    })
-
-    setTimeout(() => {
-
-    }, 500)
-
-  });
-
-  const userActionRequired = 0;
+  return numbers;
 }
 
+
+
 const StartBtn = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
+
+  const buttonPress = () => {
+    if(state.userActionRequired) return;
+
+    // // Set numbers to redux
+    const numbers = getRandomArrayInt(state.numbers.length + 1);
+    dispatch(setNumbers(numbers))
+
+    //alert(state.numbers);
+    //alert(numbers);
+
+    
+
+    const timeout = (i, count) => {
+      dispatch(clearButtonStates());
+
+      if(i < count) {
+        setTimeout(buttonState, 300, i, count);
+      }
+      else {
+        // Block start button
+
+      }
+    }
+
+    const buttonState = (i, count) => {
+      if(i < count) {
+        dispatch(setButtonState(numbers[i]))
+
+        setTimeout(timeout, 1000, i + 1, count);
+      }
+    }
+
+    timeout(0, numbers.length);
+
+    
+  
+    // numbers.forEach(async buttonId => {
+    //   //buttonStates.forEach(btn => btn.state = 0);
+
+    //   await new Promise(() => {
+    //     setTimeout(() => {
+    //       dispatch(setButtonState(buttonId))
+    //       //
+    //     }, 1000)
+    //   })
+
+    // });
+  
+    const userActionRequired = 0;
+  }
+
   return (
       <TouchableOpacity style={styles.appButtonContainer} onPress={buttonPress}>
         <Text style={styles.appButtonText}>Start</Text>
