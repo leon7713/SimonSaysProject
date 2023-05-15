@@ -1,4 +1,11 @@
-import { ADD_TODO, SET_NUMBERS, CLEAR_NUMBERS, SET_BUTTON_STATE, CLEAR_BUTTON_STATES } from "./action";
+import { SET_NUMBERS, 
+  CLEAR_NUMBERS, 
+  SET_BUTTON_STATE, 
+  CLEAR_BUTTON_STATES, 
+  SET_CURRENT_POSITION, 
+  BLOCK_BTN, ADD_SCORE, 
+  SET_RESULT_MODAL,
+  SAVE_NAMES } from "./action";
 
 const initialState = {
   numbers: [],
@@ -10,15 +17,39 @@ const initialState = {
   ],
   currentPosition: 0,
   score: 0,
-  userActionRequired: false
+  isBlockedBtn: false,
+  resultModal: false,
+  top: [{name: 'God', score: 1000000 }],
+  names: []
 };
 
-const todoReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_NUMBERS: {
       return {
         ...state,
         numbers: action.payload
+      };
+    }
+
+    case SAVE_NAMES: {
+      return {
+        ...state,
+        names: action.payload
+      };
+    }
+
+    case BLOCK_BTN: {
+      return {
+        ...state,
+        isBlockedBtn: action.payload
+      };
+    }
+
+    case ADD_SCORE: {
+      return {
+        ...state,
+        score: action.payload
       };
     }
 
@@ -47,11 +78,17 @@ const todoReducer = (state = initialState, action) => {
       };
     }
 
-    case ADD_TODO: {
-      const { id } = action.payload
+    case SET_CURRENT_POSITION: {
       return {
         ...state,
-        todos: [{ id }]
+        currentPosition: action.payload
+      };
+    }
+
+    case SET_RESULT_MODAL: {
+      return {
+        ...state,
+        resultModal: action.payload
       };
     }
 
@@ -60,4 +97,4 @@ const todoReducer = (state = initialState, action) => {
   }
 }
 
-export default todoReducer;
+export default reducer;

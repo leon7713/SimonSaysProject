@@ -7,23 +7,15 @@ TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 const CurrentScore = () => {
 
-  const numbers = useSelector(state => state.numbers);
+  const state = useSelector(state => state);
 
-  return <Text style={styles.appButtonText}>Current score: {numbers.length}</Text>;
+  return <Text style={styles.appButtonText}>Current score: {state.score}</Text>;
 };
 
 const styles = StyleSheet.create({
-  appButtonContainer: {
-    elevation: 8,
-    borderRadius: 40,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    backgroundColor: "white",
-    margin: 30
-  },
   appButtonText: {
     fontSize: 18,
-    alignSelf: "center",
+    alignSelf: "center"
   }
 });
 

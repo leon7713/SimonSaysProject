@@ -1,22 +1,31 @@
-export const ADD_TODO = "ADD_TODO";
 export const SET_NUMBERS = "SET_NUMBERS";
 export const CLEAR_NUMBERS = "CLEAR_NUMBERS";
 export const SET_BUTTON_STATE = "SET_BUTTON_STATE";
 export const CLEAR_BUTTON_STATES = "CLEAR_BUTTON_STATES";
-
-let todoId = 0;
-
-export const addTodo = task => ({
-  type: ADD_TODO,
-  payload: {
-    id: ++todoId,
-    task
-  }
-});
+export const BLOCK_BTN = "BLOCK_BTN";
+export const ADD_SCORE = "ADD_SCORE";
+export const SET_RESULT_MODAL = "SET_RESULT_MODAL";
+export const SET_CURRENT_POSITION = "SET_CURRENT_POSITION";
+export const SAVE_NAMES = "SAVE_NAME";
 
 export const setNumbers = (numbers) => ({
   type: SET_NUMBERS,
   payload: numbers
+});
+
+export const saveName = (names) => ({
+  type: SAVE_NAMES,
+  payload: names
+});
+
+export const blockBtn = (value) => ({
+  type: BLOCK_BTN,
+  payload: value
+});
+
+export const addScore = (value) => ({
+  type: ADD_SCORE,
+  payload: value
 });
 
 export const clearNumbers = () => ({
@@ -24,12 +33,23 @@ export const clearNumbers = () => ({
   payload: {}
 });
 
+//
 export const setButtonState = (buttonId) => ({
   type: SET_BUTTON_STATE,
   payload: buttonId
 });
 
+export const setCurrentPosition = (position) => ({
+  type: SET_CURRENT_POSITION,
+  payload: position
+});
+
 export const clearButtonStates = () => ({
   type: CLEAR_BUTTON_STATES,
   payload: {}
+});
+
+export const setResultModal = (show) => ({
+  type: SET_RESULT_MODAL,
+  payload: show
 });
