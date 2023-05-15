@@ -10,14 +10,11 @@ export default () => {
   const [text, setText] = useState('');
   const [isShown, setIsShown] = useState(true);
   let names = state.names;
-  const [newNames, setNewNames] = useState("");
-
 
   const _onPress = () => {
     names.push(text);
     dispatch(saveName(names));
     console.log("names:", state.names);
-    setNewNames(state.names);
     setText("");
   }
 
@@ -31,12 +28,10 @@ export default () => {
         <Button title="Save" onPress={_onPress} />
         <Button title="Hide" onPress={() => dispatch(setResultModal(false))} />
         {isShown ? <View style={{ flex: 1, padding: 50, }}>
-          {newNames.map((person) => {
+          {state.names.map((person) => {
             return (
               <View>
-                <Text style={{
-                  padding: 20, fontSize: 15, marginTop: 5
-                }}>{person.name}</Text>
+                <Text style={{padding: 5, fontSize: 15, marginTop: 5, fontWeight: 'bold'}}>{person}</Text>
               </View>
             );
           })}
