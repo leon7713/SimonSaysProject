@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Text} from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { setNumbers, setButtonState, clearButtonStates } from '../redux/action';
 
@@ -12,7 +12,7 @@ const getRandomInt = (max) => {
 const getRandomArrayInt = (count) => {
   let numbers = [];
 
-  for(let i = 0; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     numbers.push(getRandomInt(4));
   }
 
@@ -26,21 +26,20 @@ const StartBtn = () => {
   const state = useSelector(state => state);
 
   const buttonPress = () => {
-    if(state.userActionRequired) return;
+    if (state.userActionRequired) return;
 
-    // // Set numbers to redux
     const numbers = getRandomArrayInt(state.numbers.length + 1);
     dispatch(setNumbers(numbers))
 
     //alert(state.numbers);
     //alert(numbers);
 
-    
+
 
     const timeout = (i, count) => {
       dispatch(clearButtonStates());
 
-      if(i < count) {
+      if (i < count) {
         setTimeout(buttonState, 300, i, count);
       }
       else {
@@ -50,7 +49,7 @@ const StartBtn = () => {
     }
 
     const buttonState = (i, count) => {
-      if(i < count) {
+      if (i < count) {
         dispatch(setButtonState(numbers[i]))
 
         setTimeout(timeout, 1000, i + 1, count);
@@ -59,8 +58,8 @@ const StartBtn = () => {
 
     timeout(0, numbers.length);
 
-    
-  
+
+
     // numbers.forEach(async buttonId => {
     //   //buttonStates.forEach(btn => btn.state = 0);
 
@@ -72,14 +71,14 @@ const StartBtn = () => {
     //   })
 
     // });
-  
+
     const userActionRequired = 0;
   }
 
   return (
-      <TouchableOpacity style={styles.appButtonContainer} onPress={buttonPress}>
-        <Text style={styles.appButtonText}>Start</Text>
-      </TouchableOpacity>
+    <TouchableOpacity style={styles.appButtonContainer} onPress={buttonPress}>
+      <Text style={styles.appButtonText}>Start</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     backgroundColor: "white",
-    margin: 30, 
+    margin: 30,
     marginTop: 100
   },
   appButtonText: {
