@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 const CurrentScore = () => {

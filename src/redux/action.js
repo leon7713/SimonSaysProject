@@ -33,7 +33,6 @@ export const clearNumbers = () => ({
   payload: {}
 });
 
-//
 export const setButtonState = (buttonId) => ({
   type: SET_BUTTON_STATE,
   payload: buttonId

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, Text, Button, View, TextInput } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addScore, setResultModal, setCurrentPosition, setNumbers } from '../redux/action';
 
@@ -10,9 +10,6 @@ const ButtonElem = (props) => {
   const state = useSelector(state => state);
   const buttonStates = useSelector(state => state.buttonStates);
   const buttonState = buttonStates.find(x => x.button == buttonId).state
-
-  let score = state.score;
-
 
   const dispatch = useDispatch();
 
@@ -26,28 +23,16 @@ const ButtonElem = (props) => {
       const newCurrentPosition = currentPosition + 1;
       dispatch(setCurrentPosition(newCurrentPosition));
     }
-    else if (numbers[currentPosition] == buttonId && currentPosition == score ) {
+    else if (numbers[currentPosition] == buttonId && currentPosition == score) {
       const newScore = score + 1;
       dispatch(addScore(newScore));
       dispatch(setCurrentPosition(0));
     }
     else {
-      console.log(numbers, buttonId)
-      dispatch(setResultModal(true))
+      dispatch(setResultModal(true));
       dispatch(setCurrentPosition(0));
       dispatch(setNumbers([]));
     }
-
-    // 
-    // numbers
-    // current position 
-    // score
-
-    //if(numbers[currentPosition] == buttonId && currentPosition == score) score++;
-
-    //if(numbers[currentPosition] == buttonId && currentPosition < score) currentPosition++;
-
-    // if(numbers[currentPosition] != buttonId) score = 0;
   }
 
   return (

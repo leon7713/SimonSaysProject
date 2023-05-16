@@ -13,10 +13,7 @@ export default () => {
   const top = state.top;
   const showPlayerForm = (top.length < 10 || (top.length == 10 && top[9].score < state.score)) ? true : false;
 
-  console.log(top.length)
-
   useEffect(() => {
-    console.log('modal state changed')
     setResultSaved(false);
 
   }, [state.resultModal])
@@ -26,13 +23,12 @@ export default () => {
     dispatch(saveName(newTopPlayer));
     setResultSaved(true);
 
-    console.log("names:", newTopPlayer);
     setText("");
   }
 
   const closeButtonHandler = () => {
-    dispatch(setResultModal(false))
-    dispatch(addScore(0))
+    dispatch(setResultModal(false));
+    dispatch(addScore(0));
   }
 
   return (
@@ -46,8 +42,8 @@ export default () => {
               defaultValue={text}></TextInput>
             <Button title="Save" onPress={saveButtonHandler} />
           </>}
-          {resultSaved && <Text>Your result saved</Text>}
-        
+        {resultSaved && <Text>Your result saved</Text>}
+
         <Text style={{ fontWeight: 'bold', fontSize: 20, alignSelf: 'center', color: "green", marginTop: 20 }}>BEST RESULTS:</Text>
         <View style={{ flex: 1, padding: 10, alignSelf: 'center' }}>
           {state.top.map((person) => {

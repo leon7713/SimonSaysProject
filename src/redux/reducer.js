@@ -1,25 +1,27 @@
-import { SET_NUMBERS, 
-  CLEAR_NUMBERS, 
-  SET_BUTTON_STATE, 
-  CLEAR_BUTTON_STATES, 
-  SET_CURRENT_POSITION, 
-  BLOCK_BTN, ADD_SCORE, 
+import {
+  SET_NUMBERS,
+  CLEAR_NUMBERS,
+  SET_BUTTON_STATE,
+  CLEAR_BUTTON_STATES,
+  SET_CURRENT_POSITION,
+  BLOCK_BTN, ADD_SCORE,
   SET_RESULT_MODAL,
-  SAVE_NAMES } from "./action";
+  SAVE_NAMES
+} from "./action";
 
 const initialState = {
   numbers: [],
   buttonStates: [
-    {button: 0, state: 0 },
-    {button: 1, state: 0 },
-    {button: 2, state: 0 },
-    {button: 3, state: 0 },
+    { button: 0, state: 0 },
+    { button: 1, state: 0 },
+    { button: 2, state: 0 },
+    { button: 3, state: 0 },
   ],
   currentPosition: 0,
   score: 0,
   isBlockedBtn: false,
   resultModal: false,
-  top: [{name: 'God', score: 1000000 }],
+  top: [{ name: 'God', score: 1000000 }],
   names: []
 };
 
@@ -43,9 +45,8 @@ const reducer = (state = initialState, action) => {
       let newTop = state.top;
       newTop.sort(compareFn);
 
-
-      if(newTop.length < 10 || (state.top.length == 10 && state.top[9].score < action.payload.score)) {
-       newTop = [ ...newTop, action.payload ];
+      if (newTop.length < 10 || (state.top.length == 10 && state.top[9].score < action.payload.score)) {
+        newTop = [...newTop, action.payload];
       }
 
       newTop.sort(compareFn);
@@ -82,7 +83,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         buttonStates: state.buttonStates.map(x => {
-          if(x.button == action.payload) return { button: x.button, state: 1 }
+          if (x.button == action.payload) return { button: x.button, state: 1 }
 
           return { button: x.button, state: 0 }
         })
@@ -92,7 +93,7 @@ const reducer = (state = initialState, action) => {
     case CLEAR_BUTTON_STATES: {
       return {
         ...state,
-        buttonStates: state.buttonStates.map(x => ({ ...x, state: 0}))
+        buttonStates: state.buttonStates.map(x => ({ ...x, state: 0 }))
       };
     }
 

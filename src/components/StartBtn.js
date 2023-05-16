@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { setNumbers, setButtonState, clearButtonStates, blockBtn } from '../redux/action';
 
@@ -9,18 +9,6 @@ const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
 }
 
-const getRandomArrayInt = (count) => {
-  let numbers = [];
-
-  for (let i = 0; i < count; i++) {
-    numbers.push(getRandomInt(4));
-  }
-
-  return numbers;
-}
-
-
-
 const StartBtn = () => {
 
   const dispatch = useDispatch();
@@ -28,10 +16,6 @@ const StartBtn = () => {
 
   const buttonPress = () => {
     dispatch(blockBtn(false));
-    console.log(state.isBlockedBtn);
-    //if (state.isBlockedBtn) return;
-
-    //const numbers = getRandomArrayInt(state.score + 1);
 
     let numbers = state.numbers.map(x => x);
     numbers.push(getRandomInt(4));
@@ -52,7 +36,7 @@ const StartBtn = () => {
 
     const buttonState = (i, count) => {
       if (i < count) {
-        dispatch(setButtonState(numbers[i]))
+        dispatch(setButtonState(numbers[i]));
 
         setTimeout(timeout, 500, i + 1, count);
       }
