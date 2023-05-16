@@ -13,9 +13,9 @@ export const setNumbers = (numbers) => ({
   payload: numbers
 });
 
-export const saveName = (names) => ({
+export const saveName = (player) => ({
   type: SAVE_NAMES,
-  payload: names
+  payload: player
 });
 
 export const blockBtn = (value) => ({

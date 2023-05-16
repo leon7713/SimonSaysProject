@@ -23,6 +23,13 @@ const initialState = {
   names: []
 };
 
+const compareFn = (a, b) => {
+  if (a.score < b.score) return 1;
+  if (a.score > b.score) return -1;
+
+  return 0;
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_NUMBERS: {
@@ -33,9 +40,20 @@ const reducer = (state = initialState, action) => {
     }
 
     case SAVE_NAMES: {
+      let newTop = state.top;
+      newTop.sort(compareFn);
+
+
+      if(newTop.length < 10 || (state.top.length == 10 && state.top[9].score < action.payload.score)) {
+       newTop = [ ...newTop, action.payload ];
+      }
+
+      newTop.sort(compareFn);
+      newTop = newTop.slice(0, 10);
+
       return {
         ...state,
-        names: action.payload
+        top: newTop
       };
     }
 

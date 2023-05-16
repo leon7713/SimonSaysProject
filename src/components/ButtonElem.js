@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, Text, Button, View, TextInput } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addScore, setResultModal, setCurrentPosition, setNumbers } from '../redux/action';
-import Modal from "react-native-modal";
-
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
@@ -36,7 +34,6 @@ const ButtonElem = (props) => {
     else {
       console.log(numbers, buttonId)
       dispatch(setResultModal(true))
-      dispatch(addScore(0))
       dispatch(setCurrentPosition(0));
       dispatch(setNumbers([]));
     }
